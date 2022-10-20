@@ -10,16 +10,21 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import Conexiones.Conexion;
 import Funciones.Alumno;
+import Funciones.Asignatura;
 import Funciones.JFrameDiseño;
 import Funciones.OperacionesBD;
 import Funciones.Profesor;
 import Funciones.insertarImagenes;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
+
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.List;
 import java.awt.event.ActionEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeEvent;
@@ -40,6 +45,8 @@ public class InsertarAlumno extends JFrame  {
 	protected boolean existe;
 	private ArrayList<Alumno> alumnos= new ArrayList<Alumno>();
 	private ArrayList<Profesor> profesores= new ArrayList<Profesor>();
+	private ArrayList<Asignatura> asignaturas= new ArrayList<Asignatura>();
+	private ArrayList<JCheckBox> checkboxes;
 
 
 
@@ -48,6 +55,7 @@ public class InsertarAlumno extends JFrame  {
 		Conexion conn = new Conexion();
 		this.alumnos=OperacionesBD.ExtraccionTablaAlumno(conn.conectarMySQL());
 		this.profesores=OperacionesBD.ExtraccionTablaProfesor(conn.conectarMySQL());
+		this.asignaturas=OperacionesBD.ExtraccionTodasAsignaturas(conn.conectarMySQL());
 		setTitle("Insertar alumno");
 		setBounds(100, 100, 1080, 561);
 		contentPane = new JPanel();
@@ -59,6 +67,7 @@ public class InsertarAlumno extends JFrame  {
 
 
 	private void componentes() {
+		Conexion conn = new Conexion();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setLocationRelativeTo(null);
 		setContentPane(contentPane);
@@ -115,6 +124,11 @@ public class InsertarAlumno extends JFrame  {
 					if(combrobarCamposVacios(textDNI, textNombre, textApellidos, textFecha, textTelefono,textContrasenia)) {
 						try {
 							Funciones.OperacionesBD.insertarAlumno(textDNI.getText(), textNombre.getText(),textApellidos.getText(),textFecha.getText(),Integer.parseInt(textTelefono.getText()),textContrasenia.getText(),lblFoto.getText(),conn.conectarMySQL());
+							for(JCheckBox check : checkboxes) {
+								if(check.isSelected()) {
+									OperacionesBD.MatricularAlumnoAsignatura(conn.conectarMySQL(),textDNI.getText(),Integer.valueOf(check.getText().substring(check.getText().length()-1, check.getText().length())));
+								}
+							}
 							dispose();
 							VistaAlumnos va= new VistaAlumnos();
 							va.setVisible(true);
@@ -213,9 +227,20 @@ public class InsertarAlumno extends JFrame  {
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(565, 102, 269, 249);
 		contentPane.add(scrollPane);
-		
+		checkboxes = new ArrayList<>();
 		JPanel panel = new JPanel();
 		scrollPane.setViewportView(panel);
+		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+		
+
+		for(Asignatura asig : asignaturas) {
+		    JCheckBox box = new JCheckBox(asig.getNombre()+"_ID:"+asig.getId());
+		    checkboxes.add(box);
+		    panel.add(box);
+		}
+		
+		
+
 		
 		JLabel lblAsignaturas = new JLabel("Seleccionar asignaturas");
 		lblAsignaturas.setFont(new Font("Tahoma", Font.PLAIN, 14));

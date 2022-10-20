@@ -299,6 +299,21 @@ public class OperacionesBD {
 		return alum;
     }
 	
+	public static void MatricularAlumnoAsignatura(Connection conn, String dniAlu, int idAsig) {
+		System.out.println(dniAlu+"-"+idAsig);
+		PreparedStatement psInsert;
+        String sqlInsert;
+        try {
+        	sqlInsert = "insert into matricula values(?,?);";
+        	psInsert=conn.prepareStatement(sqlInsert);
+        	psInsert.setString(1, dniAlu);
+        	psInsert.setInt(2, idAsig);
+        	psInsert.executeUpdate();
+        }catch(SQLException e){
+            JOptionPane.showMessageDialog(null, "Error de conexión:" + e.getMessage());
+        }
+	}
+	
 	public static void actualizarAlumno(String dni,String nombre,String apellidos,String fecha,int telefono,String contrasenia,String img,Connection conn) {
 		String sql="update alumno set nombre=?,apellidos=?,fecha_nacimiento=?,telefono=?,clave=?,img=? where dni=?";
 		try {

@@ -5,21 +5,28 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import com.toedter.calendar.JCalendar;
 import Conexiones.Conexion;
+import Funciones.Asignatura;
 import Funciones.JFrameDiseño;
+import Funciones.OperacionesBD;
 import Funciones.insertarImagenes;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
+
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.sql.Connection;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
  
 
@@ -32,6 +39,8 @@ public class ActualizarAlumno extends JFrame  {
 	private JButton btnActualizar,btnAadirImagen;
 	private String relativaFoto;
 	private JCalendar calendar;
+	private ArrayList<JCheckBox> checkboxes;
+	private ArrayList<Asignatura> asignaturas=new ArrayList<Asignatura>();
 
 	public ActualizarAlumno() {
 		setTitle("Actualizar alumno");
@@ -43,7 +52,8 @@ public class ActualizarAlumno extends JFrame  {
 	}
 	
 	public ActualizarAlumno(String dni, String nombre, String apellidos, String fecha,int tel ,String clave,String imagen, Connection conn) {
-		
+		Conexion conn1 = new Conexion();
+		this.asignaturas=OperacionesBD.ExtraccionTodasAsignaturas(conn1.conectarMySQL());
 		setTitle("Actualizar alumno");
 		setBounds(100, 100, 1080, 561);
 		contentPane = new JPanel();
@@ -203,6 +213,21 @@ public class ActualizarAlumno extends JFrame  {
 		calendar.setWeekOfYearVisible(false);
 		calendar.setBounds(314, 259, 199, 137);
 		contentPane.add(calendar);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(565, 102, 269, 249);
+		contentPane.add(scrollPane);
+		
+		JPanel panel = new JPanel();
+		scrollPane.setViewportView(panel);
+		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+		checkboxes = new ArrayList<>();
+
+		for(Asignatura asig : asignaturas=new ArrayList<Asignatura>()) {
+		    JCheckBox box = new JCheckBox(asig.getNombre());
+		    checkboxes.add(box);
+		    panel.add(box);
+		}
 		
 	}
 	public boolean combrobarCamposVacios(JTextField nombre,JTextField apellidos,JTextField telefono,JTextField contrasenia) {
