@@ -84,9 +84,9 @@ public class VistaAlumnos extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		panel = new JPanel();
+		panel.setBackground(JFrameDiseño.fondoAdmin);
 		panel.setBounds(0, 0, 755, 499);
 		contentPane.add(panel);
-		contentPane.setBackground(JFrameDiseño.fondoAdmin);
 		panel.setLayout(null);
 		
 		btnVolverAdmin = new JButton("Volver");
