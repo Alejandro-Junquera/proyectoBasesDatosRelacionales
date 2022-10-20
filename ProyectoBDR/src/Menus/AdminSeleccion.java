@@ -33,6 +33,7 @@ public class AdminSeleccion extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		setLocationRelativeTo(null);
+		contentPane.setBackground(JFrameDiseño.fondoAdmin);
 		
 		/*JButton btnNewButton = new JButton("Administrar Alumnos");
 		btnNewButton.addActionListener(new ActionListener() {
