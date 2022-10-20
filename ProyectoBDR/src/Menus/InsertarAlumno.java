@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeEvent;
+import javax.swing.JScrollPane;
  
 
 public class InsertarAlumno extends JFrame  {
@@ -62,37 +63,37 @@ public class InsertarAlumno extends JFrame  {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		JLabel lblNombre = new JLabel("Nombre");
-		lblNombre.setBounds(172, 90, 109, 25);
+		lblNombre.setBounds(10, 90, 109, 25);
 		lblNombre.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		contentPane.add(lblNombre);
 		
 		JLabel lblContrasenia = new JLabel("Contraseña");
-		lblContrasenia.setBounds(172, 421, 109, 25);
+		lblContrasenia.setBounds(10, 421, 109, 25);
 		lblContrasenia.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		contentPane.add(lblContrasenia);
 		
 		textNombre = new JTextField();
-		textNombre.setBounds(314, 75, 253, 40);
+		textNombre.setBounds(152, 75, 253, 40);
 		contentPane.add(textNombre);
 		textNombre.setColumns(10);
 		
 		textContrasenia = new JTextField();
-		textContrasenia.setBounds(314, 406, 253, 40);
+		textContrasenia.setBounds(152, 406, 253, 40);
 		contentPane.add(textContrasenia);
 		textContrasenia.setColumns(10);
 		
 		JLabel lblDNI = new JLabel("DNI");
-		lblDNI.setBounds(172, 25, 34, 25);
+		lblDNI.setBounds(10, 25, 34, 25);
 		lblDNI.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		contentPane.add(lblDNI);
 		
 		textDNI = new JTextField();
-		textDNI.setBounds(314, 10, 253, 40);
+		textDNI.setBounds(152, 10, 253, 40);
 		textDNI.setColumns(10);
 		contentPane.add(textDNI);
 		
 		JButton btnAniadir = new JButton("Añadir");
-		btnAniadir.setBounds(206, 456, 180, 40);
+		btnAniadir.setBounds(163, 474, 180, 40);
 		btnAniadir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				existe=false;
@@ -136,7 +137,7 @@ public class InsertarAlumno extends JFrame  {
 		contentPane.add(btnAniadir);
 		
 		JButton btnVolver = new JButton("Volver");
-		btnVolver.setBounds(679, 456, 180, 40);
+		btnVolver.setBounds(624, 474, 180, 40);
 		btnVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
@@ -148,13 +149,13 @@ public class InsertarAlumno extends JFrame  {
 		contentPane.add(btnVolver);
 		
 		lblFoto = new JLabel("");
-		lblFoto.setBounds(691, 93, 152, 190);
+		lblFoto.setBounds(904, 10, 152, 190);
 		lblFoto.setText(".\\Imagenes\\Fotos\\defecto.jfif");
 		lblFoto.setIcon(ii.ResizableImage(lblFoto.getText(), lblFoto));
 		contentPane.add(lblFoto);
 		
 		JButton btnAadirImagen = new JButton("Añadir Imagen");
-		btnAadirImagen.setBounds(691, 301, 152, 40);
+		btnAadirImagen.setBounds(904, 218, 152, 40);
 		btnAadirImagen.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ii = new insertarImagenes();
@@ -165,33 +166,33 @@ public class InsertarAlumno extends JFrame  {
 		contentPane.add(btnAadirImagen);
 		
 		JLabel lblApellidos = new JLabel("Apellidos");
-		lblApellidos.setBounds(172, 155, 109, 25);
+		lblApellidos.setBounds(10, 156, 109, 25);
 		lblApellidos.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		contentPane.add(lblApellidos);
 		
 		textApellidos = new JTextField();
-		textApellidos.setBounds(314, 140, 253, 40);
+		textApellidos.setBounds(152, 141, 253, 40);
 		textApellidos.setColumns(10);
 		contentPane.add(textApellidos);
 		
 		JLabel lblTelefono = new JLabel("Telefono");
-		lblTelefono.setBounds(172, 219, 109, 25);
+		lblTelefono.setBounds(10, 217, 109, 25);
 		lblTelefono.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		contentPane.add(lblTelefono);
 		
 		textTelefono = new JTextField();
-		textTelefono.setBounds(314, 204, 253, 40);
+		textTelefono.setBounds(152, 202, 253, 40);
 		textTelefono.setColumns(10);
 		contentPane.add(textTelefono);
 		
 		JLabel lblFechaNacimiento = new JLabel("Fecha Nacimiento");
-		lblFechaNacimiento.setBounds(172, 316, 132, 25);
+		lblFechaNacimiento.setBounds(10, 316, 132, 25);
 		lblFechaNacimiento.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		contentPane.add(lblFechaNacimiento);
 		
 		textFecha = new JTextField("");
 		textFecha.setColumns(10);
-		textFecha.setBounds(523, 311, 146, 40);
+		textFecha.setBounds(373, 311, 146, 40);
 		textFecha.setEditable(false);
 		contentPane.add(textFecha);
 		
@@ -205,8 +206,20 @@ public class InsertarAlumno extends JFrame  {
 			}
 		});
 		fecha.setWeekOfYearVisible(false);
-		fecha.setBounds(314, 259, 199, 137);
+		fecha.setBounds(152, 259, 199, 137);
 		contentPane.add(fecha);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(565, 102, 269, 249);
+		contentPane.add(scrollPane);
+		
+		JPanel panel = new JPanel();
+		scrollPane.setViewportView(panel);
+		
+		JLabel lblAsignaturas = new JLabel("Seleccionar asignaturas");
+		lblAsignaturas.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblAsignaturas.setBounds(624, 69, 149, 25);
+		contentPane.add(lblAsignaturas);
 		
 		
 		 
