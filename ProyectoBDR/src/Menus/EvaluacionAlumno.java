@@ -78,6 +78,7 @@ public class EvaluacionAlumno extends JFrame {
 				
 				InsertarNota in = new InsertarNota(conn, dniAlu, rasAsig.get(filaSeleccionada).getId());
 				in.setVisible(true);
+				llenarTabla(conn, rasAsig, dniAlu);
 			}
 		});
 		btnEvaluar.setBounds(56, 212, 89, 23);

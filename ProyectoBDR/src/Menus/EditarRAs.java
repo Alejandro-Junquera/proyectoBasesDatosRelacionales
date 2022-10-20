@@ -96,10 +96,12 @@ public class EditarRAs extends JFrame {
 				if(filaSeleccionada==null) {
 					JOptionPane.showMessageDialog(null, "Selecciona un RA");
 				}else {
-					Conexion con = new Conexion();
+					int op=JOptionPane.showConfirmDialog(null, "¿Seguro que deseas eliminar el RA?");
+					if(op==0) {
 					OperacionesBD.borrarRA(rasAsig.get(filaSeleccionada).getId(), conn);
 					rasAsig=OperacionesBD.extraerRAsAsig(conn, idAsig);
 					llenarTabla(conn, rasAsig);
+					}
 				}
 				
 			}

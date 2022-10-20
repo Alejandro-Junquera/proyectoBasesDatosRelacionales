@@ -87,7 +87,7 @@ public class AlumnosMatriculados extends JFrame {
 				EvaluacionAlumno ea = new EvaluacionAlumno(conn,dniProf,alumnos.get(filaSeleccionada).getDNI(),
 						alumnos.get(filaSeleccionada).getNombre(),alumnos.get(filaSeleccionada).getApellidos(),nombreAsig, rasAsig);
 				ea.setVisible(true);
-				dispose();
+				llenarTabla(idAsig, conn);
 			}
 		});
 		btnEvaluar.setBounds(72, 254, 89, 23);

@@ -111,11 +111,12 @@ public class AlumnoInfo extends JFrame {
 		JLabel lblImg = new JLabel("Insertar Imagen");
 		lblImg.setBounds(371, 156, 127, 143);
 		contentPane.add(lblImg);
-		
+		lblImg.setIcon(insertarImagenes.ResizableImage(OperacionesBD.ExtraerImagenAlumno(conn, dniAlumno), lblImg));
 		JButton btnImg = new JButton("Añadir Imagen");
 		btnImg.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				relativa=insertarImagenes.generarRutaImg(relativa,lblImg);
+				OperacionesBD.insertarImagenAlumno(conn, dniAlumno, relativa);
 			}
 		});
 		btnImg.setBounds(371, 310, 127, 35);

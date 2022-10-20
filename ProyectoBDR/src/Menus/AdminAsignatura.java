@@ -89,11 +89,14 @@ public class AdminAsignatura extends JFrame {
 				if(filaSeleccionada==null) {
 					JOptionPane.showMessageDialog(null, "Selecciona una asignatura");
 				}else {
+					int op=JOptionPane.showConfirmDialog(null, "¿Seguro que deseas eliminar la asignatura?");
+					if(op==0) {
 					Conexion con = new Conexion();
 					OperacionesBD.borrarDNIProfAsignatura(filaSeleccionada,con.conectarMySQL());
 					OperacionesBD.borrarAsignatura(asignaturas.get(filaSeleccionada).getId(), con.conectarMySQL());
 					asignaturas=OperacionesBD.ExtraccionTodasAsignaturas(conn);
 					actualizarTablaAsig();
+					}
 				}
 			}
 		});

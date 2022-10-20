@@ -22,8 +22,7 @@ public class OperacionesBD {
 			statement.close();
 			return profesores;
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Error de conexión:" + e.getErrorCode());
 		}
 		return null;
 	}
@@ -48,8 +47,7 @@ public class OperacionesBD {
 			}
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Error de conexión:" + e.getErrorCode());
 		}
 	}
 	public static ArrayList<Asignatura> ExtraccionAsignaturas(Connection conn){
@@ -64,8 +62,7 @@ public class OperacionesBD {
 			statement.close();
 			return asignaturas;
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Error de conexión:" + e.getErrorCode());
 		}
 		
 		return null;	
@@ -83,8 +80,7 @@ public class OperacionesBD {
 			statement.close();
 			return asignaturas;
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Error de conexión:" + e.getErrorCode());
 		}
 		
 		return null;	
@@ -101,8 +97,7 @@ public class OperacionesBD {
 			statement.close();
 			return asignaturas;
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Error de conexión:" + e.getErrorCode());
 		}
 		
 		return null;	
@@ -121,8 +116,7 @@ public class OperacionesBD {
 						rs.getInt("horasSemanales"),rs.getString("dni_pro")));
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Error de conexión:" + e.getErrorCode());
 		}
 		return res;
 	}
@@ -136,8 +130,7 @@ public class OperacionesBD {
 			int rs=statement.executeUpdate();
 			statement.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Error de conexión:" + e.getErrorCode());
 		}
 	}
 	
@@ -150,8 +143,7 @@ public class OperacionesBD {
 			int rs=statement.executeUpdate();
 			statement.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Error de conexión:" + e.getErrorCode());
 		}
 	}
 	
@@ -163,8 +155,7 @@ public class OperacionesBD {
 			int rs=statement.executeUpdate();
 			statement.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Error de conexión:" + e.getErrorCode());
 		}
 	}
 	public static void actualizarProfesor(String dni,String nombre,String apellidos,String email,String contrasenia,String img,ArrayList<Asignatura> asigLibres,ArrayList<Asignatura> asigProp,Connection conn) {
@@ -194,8 +185,7 @@ public class OperacionesBD {
 			}
 			statement.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Error de conexión:" + e.getErrorCode());
 		}
 		
 	}
@@ -258,8 +248,7 @@ public class OperacionesBD {
 				alumnos.add(new Alumno(rs.getString("dni"),rs.getString("nombre"),rs.getString("apellidos"),rs.getString("fecha_nacimiento"),rs.getInt("telefono"),rs.getString("clave"),rs.getString("img")));
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Error de conexión:" + e.getErrorCode());
 		}
 		return alumnos;
 		
@@ -276,8 +265,7 @@ public class OperacionesBD {
 				alumnos.add(new Alumno(rs.getString("dni"),rs.getString("nombre"),rs.getString("apellidos"),rs.getString("fecha_nacimiento"),rs.getInt("telefono"),rs.getString("clave"),rs.getString("img")));
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Error de conexión:" + e.getErrorCode());
 		}
 		return alumnos;
 		
@@ -325,8 +313,7 @@ public class OperacionesBD {
 			statement.executeUpdate();
 			statement.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Error de conexión:" + e.getErrorCode());
 		}
 		
 	}
@@ -372,18 +359,47 @@ public class OperacionesBD {
     }
 	
 	public static void CalificarAlumno(Connection conn, String dniAlu, int idRA, float nota) {
-		PreparedStatement ps;
-        String sql;
+		PreparedStatement psUpdate;
+		PreparedStatement psInsert;
+        String sqlUpdate;
+        String sqlInsert;
         try {
-        	sql = "insert into califica values(?,?,?)";
-            ps = conn.prepareStatement(sql);
-            ps.setString(1, dniAlu);
-            ps.setInt(2, idRA);
-            ps.setFloat(3, nota);
-            ps.executeUpdate();
+        	sqlInsert = "insert into califica values(?,?,?);";
+        	psInsert=conn.prepareStatement(sqlInsert);
+        	psInsert.setString(1, dniAlu);
+        	psInsert.setInt(2, idRA);
+        	psInsert.setFloat(3, nota);
+        	sqlUpdate = "update califica set nota=? where dni_alu=? and id_ra=?;";
+            psUpdate = conn.prepareStatement(sqlUpdate);
+            psUpdate.setFloat(1, nota);
+            psUpdate.setString(2, dniAlu);
+            psUpdate.setInt(3, idRA);
+            
+            if(ExisteNota(conn, dniAlu, idRA)) {
+            	psUpdate.executeUpdate();
+            }else {
+            	psInsert.executeUpdate();
+            }
         }catch(SQLException e){
             JOptionPane.showMessageDialog(null, "Error de conexión:" + e.getMessage());
         }
+	}
+	public static boolean ExisteNota(Connection conn, String dniAlu, int idRA) {
+		String sql="select * from califica where dni_alu=? and id_ra=?;";
+		try {
+			PreparedStatement statement=conn.prepareStatement(sql);
+			statement.setString(1,dniAlu);
+			statement.setInt(2, idRA);
+			ResultSet rs=statement.executeQuery();
+			if(rs.next()) {
+				return true;
+			}else {
+				return false;
+			}
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, "Error de conexión:" + e.getErrorCode());
+		}
+		return false;
 	}
 	
 	public static void BorrarAlumno(String dni,Connection conn){
@@ -396,7 +412,6 @@ public class OperacionesBD {
 			JOptionPane.showMessageDialog(null, "Se han eliminado el alumno correctamente");
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog(null, "Error de conexión:" + e.getErrorCode());
-			;
 		}
 
 	}
@@ -422,8 +437,7 @@ public class OperacionesBD {
 			statement.setInt(1,idAsig);
 			statement.executeUpdate();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Error de conexión:" + e.getErrorCode());
 		}
 	}
 	public static void borrarRA(int idRA,Connection conn) {
@@ -434,8 +448,7 @@ public class OperacionesBD {
 			statement.setInt(1,idRA);
 			int rs=statement.executeUpdate();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Error de conexión:" + e.getErrorCode());
 		}
 	}
 	public static void borrarCalificacionesRA(int idRA, Connection conn) {
@@ -445,8 +458,7 @@ public class OperacionesBD {
 			statement.setInt(1,idRA);
 			int rs=statement.executeUpdate();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Error de conexión:" + e.getErrorCode());
 		}
 	}
 	public static void borrarMatriculasAsignatura(int idAsig,Connection conn) {
@@ -456,8 +468,7 @@ public class OperacionesBD {
 			statement.setInt(1,idAsig);
 			statement.executeUpdate();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Error de conexión:" + e.getErrorCode());
 		}
 	}
 	
@@ -474,8 +485,7 @@ public class OperacionesBD {
 						rs.getInt("ponderacion"),rs.getInt("id_asi")));
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Error de conexión:" + e.getErrorCode());
 		}
 		
 		return res;
@@ -493,8 +503,7 @@ public class OperacionesBD {
 				res=rs.getFloat("nota");
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Error de conexión:" + e.getErrorCode());
 		}
 		
 		return res;
@@ -512,8 +521,7 @@ public class OperacionesBD {
 						rs.getString("clave"),rs.getString("img"),rs.getString("email"));
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Error de conexión:" + e.getErrorCode());
 		}
 		return p;
 	}
@@ -529,10 +537,65 @@ public class OperacionesBD {
 				return false;
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Error de conexión:" + e.getErrorCode());
 		}
 		return false;
 		
 	}
+	
+	public static String ExtraerImagenProfesor(Connection conn, String dniProf) {
+		String res="defecto.jfif";
+		String sql="select img from profesor where dni=?;";
+		try {
+			PreparedStatement statement=conn.prepareStatement(sql);
+			statement.setString(1,dniProf);
+			ResultSet rs=statement.executeQuery();
+			while(rs.next()) {
+				res=rs.getString("img");
+			}
+			
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, "Error de conexión:" + e.getErrorCode());
+		}
+		return res;
+	}
+	public static String ExtraerImagenAlumno(Connection conn, String dniAlu) {
+		String res="defecto.jfif";
+		String sql="select img from alumno where dni=?;";
+		try {
+			PreparedStatement statement=conn.prepareStatement(sql);
+			statement.setString(1,dniAlu);
+			ResultSet rs=statement.executeQuery();
+			while(rs.next()) {
+				res=rs.getString("img");
+			}
+			
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, "Error de conexión:" + e.getErrorCode());
+		}
+		return res;
+	}
+	public static void insertarImagenProfesor(Connection conn, String dniProf, String ruta) {
+		String sql="update profesor set img=? where dni=?;";
+		try {
+			PreparedStatement statement=conn.prepareStatement(sql);
+			statement.setString(1,ruta);
+			statement.setString(2,dniProf);
+			int rs=statement.executeUpdate();			
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, "Error de conexión:" + e.getErrorCode());
+		}
+	}
+	public static void insertarImagenAlumno(Connection conn, String dniAlu, String ruta) {
+		String sql="update alumno set img=? where dni=?;";
+		try {
+			PreparedStatement statement=conn.prepareStatement(sql);
+			statement.setString(1,ruta);
+			statement.setString(2,dniAlu);
+			int rs=statement.executeUpdate();		
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, "Error de conexión:" + e.getErrorCode());
+		}
+	}
+	
 }
