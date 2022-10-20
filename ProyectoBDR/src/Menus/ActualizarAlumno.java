@@ -12,6 +12,7 @@ import com.toedter.calendar.JCalendar;
 import Conexiones.Conexion;
 import Funciones.Asignatura;
 import Funciones.JFrameDiseño;
+import Funciones.Matricula;
 import Funciones.OperacionesBD;
 import Funciones.insertarImagenes;
 import javax.swing.JLabel;
@@ -41,6 +42,7 @@ public class ActualizarAlumno extends JFrame  {
 	private JCalendar calendar;
 	private ArrayList<JCheckBox> checkboxes;
 	private ArrayList<Asignatura> asignaturas=new ArrayList<Asignatura>();
+	private ArrayList<Matricula> matriculas=new ArrayList<Matricula>();
 
 	public ActualizarAlumno() {
 		setTitle("Actualizar alumno");
@@ -54,6 +56,7 @@ public class ActualizarAlumno extends JFrame  {
 	public ActualizarAlumno(String dni, String nombre, String apellidos, String fecha,int tel ,String clave,String imagen, Connection conn) {
 		Conexion conn1 = new Conexion();
 		this.asignaturas=OperacionesBD.ExtraccionTodasAsignaturas(conn1.conectarMySQL());
+		this.matriculas=OperacionesBD.MatricularAlumnoAsignatura(conn1.conectarMySQL());
 		setTitle("Actualizar alumno");
 		setBounds(100, 100, 1080, 561);
 		contentPane = new JPanel();
@@ -71,7 +74,7 @@ public class ActualizarAlumno extends JFrame  {
 		this.img=getToolkit().getImage(imagen);
 		this.img=this.img.getScaledInstance(lblFoto.getWidth(), lblFoto.getHeight(),Image.SCALE_DEFAULT);
 		lblFoto.setIcon(new ImageIcon(img));
-			
+		System.out.println(matriculas);	
 	}
 
 	private void componentes() {
@@ -83,32 +86,32 @@ public class ActualizarAlumno extends JFrame  {
 		
 		lblNombre = new JLabel("Nombre");
 		lblNombre.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblNombre.setBounds(172, 96, 109, 25);
+		lblNombre.setBounds(10, 84, 109, 25);
 		contentPane.add(lblNombre);
 		
 		lblContrasenia = new JLabel("Contraseña");
 		lblContrasenia.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblContrasenia.setBounds(172, 421, 109, 25);
+		lblContrasenia.setBounds(10, 406, 109, 25);
 		contentPane.add(lblContrasenia);
 		
 		textNombre = new JTextField();
-		textNombre.setBounds(314, 81, 253, 40);
+		textNombre.setBounds(152, 69, 253, 40);
 		contentPane.add(textNombre);
 		textNombre.setColumns(10);
 		
 		textContrasenia = new JTextField();
-		textContrasenia.setBounds(314, 406, 253, 40);
+		textContrasenia.setBounds(152, 391, 253, 40);
 		contentPane.add(textContrasenia);
 		textContrasenia.setColumns(10);
 		
 		lblDNI = new JLabel("DNI");
 		lblDNI.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblDNI.setBounds(172, 31, 34, 25);
+		lblDNI.setBounds(10, 25, 34, 25);
 		contentPane.add(lblDNI);
 		
 		textDNI = new JTextField();
 		textDNI.setColumns(10);
-		textDNI.setBounds(314, 10, 253, 40);
+		textDNI.setBounds(152, 10, 253, 40);
 		textDNI.setEditable(false);
 		contentPane.add(textDNI);
 		
@@ -153,7 +156,7 @@ public class ActualizarAlumno extends JFrame  {
 		contentPane.add(btnVolver);
 		
 		lblFoto = new JLabel("");
-		lblFoto.setBounds(691, 93, 152, 190);
+		lblFoto.setBounds(904, 10, 152, 190);
 		contentPane.add(lblFoto);
 		
 		btnAadirImagen = new JButton("Añadir Imagen");
@@ -165,37 +168,37 @@ public class ActualizarAlumno extends JFrame  {
 			}
 		});
 		btnAadirImagen.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnAadirImagen.setBounds(691, 301, 152, 40);
+		btnAadirImagen.setBounds(904, 210, 152, 40);
 		contentPane.add(btnAadirImagen);
 		
 		lblApellidos = new JLabel("Apellidos");
 		lblApellidos.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblApellidos.setBounds(172, 155, 109, 25);
+		lblApellidos.setBounds(10, 145, 56, 25);
 		contentPane.add(lblApellidos);
 		
 		textApellidos = new JTextField();
 		textApellidos.setColumns(10);
-		textApellidos.setBounds(314, 146, 253, 40);
+		textApellidos.setBounds(152, 130, 253, 40);
 		contentPane.add(textApellidos);
 		
 		lblTelefono = new JLabel("Telefono");
 		lblTelefono.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblTelefono.setBounds(172, 219, 109, 25);
+		lblTelefono.setBounds(10, 209, 56, 25);
 		contentPane.add(lblTelefono);
 		
 		textTelefono = new JTextField();
 		textTelefono.setColumns(10);
-		textTelefono.setBounds(314, 204, 253, 40);
+		textTelefono.setBounds(152, 194, 253, 40);
 		contentPane.add(textTelefono);
 		
 		lblFechaNacimiento = new JLabel("Fecha Nacimiento");
 		lblFechaNacimiento.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblFechaNacimiento.setBounds(172, 316, 132, 25);
+		lblFechaNacimiento.setBounds(10, 316, 132, 25);
 		contentPane.add(lblFechaNacimiento);
 		
 		textFecha = new JTextField();
 		textFecha.setColumns(10);
-		textFecha.setBounds(521, 301, 160, 40);
+		textFecha.setBounds(361, 289, 160, 40);
 		textFecha.setEditable(false);
 		contentPane.add(textFecha);
 		
@@ -211,11 +214,11 @@ public class ActualizarAlumno extends JFrame  {
 			}
 		});
 		calendar.setWeekOfYearVisible(false);
-		calendar.setBounds(314, 259, 199, 137);
+		calendar.setBounds(152, 244, 199, 137);
 		contentPane.add(calendar);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(565, 102, 269, 249);
+		scrollPane.setBounds(566, 105, 269, 249);
 		contentPane.add(scrollPane);
 		
 		JPanel panel = new JPanel();
@@ -223,11 +226,16 @@ public class ActualizarAlumno extends JFrame  {
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 		checkboxes = new ArrayList<>();
 
-		for(Asignatura asig : asignaturas=new ArrayList<Asignatura>()) {
-		    JCheckBox box = new JCheckBox(asig.getNombre());
+		for(Asignatura asig : asignaturas) {
+		    JCheckBox box = new JCheckBox(asig.getNombre()+"_ID:"+asig.getId());
 		    checkboxes.add(box);
 		    panel.add(box);
 		}
+		
+		JLabel lblAsignaturas = new JLabel("Seleccionar asignaturas");
+		lblAsignaturas.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblAsignaturas.setBounds(624, 69, 149, 25);
+		contentPane.add(lblAsignaturas);
 		
 	}
 	public boolean combrobarCamposVacios(JTextField nombre,JTextField apellidos,JTextField telefono,JTextField contrasenia) {

@@ -314,6 +314,21 @@ public class OperacionesBD {
         }
 	}
 	
+	public static ArrayList<Matricula> MatricularAlumnoAsignatura(Connection conn) {
+		String sql="select dni_alu,id_asi from matricula;";
+		ArrayList<Matricula> matriculas=new ArrayList<>();
+		try {
+			PreparedStatement statement=conn.prepareStatement(sql);
+			ResultSet rs=statement.executeQuery();
+			while(rs.next()) {
+				matriculas.add(new Matricula(rs.getString("dni_alu"),rs.getInt("id_asi")));
+			}
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, "Error de conexión:" + e.getErrorCode());
+		}
+		return matriculas;
+	}
+	
 	public static void actualizarAlumno(String dni,String nombre,String apellidos,String fecha,int telefono,String contrasenia,String img,Connection conn) {
 		String sql="update alumno set nombre=?,apellidos=?,fecha_nacimiento=?,telefono=?,clave=?,img=? where dni=?";
 		try {
