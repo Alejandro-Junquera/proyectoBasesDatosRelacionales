@@ -11,6 +11,7 @@ import javax.swing.border.EmptyBorder;
 import Conexiones.Conexion;
 import Funciones.Alumno;
 import Funciones.OperacionesBD;
+import Funciones.Profesor;
 import Funciones.insertarImagenes;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -37,6 +38,7 @@ public class InsertarAlumno extends JFrame  {
 	private JTextField textFecha;
 	protected boolean existe;
 	private ArrayList<Alumno> alumnos= new ArrayList<Alumno>();
+	private ArrayList<Profesor> profesores= new ArrayList<Profesor>();
 
 
 
@@ -44,6 +46,7 @@ public class InsertarAlumno extends JFrame  {
 	public InsertarAlumno() {
 		Conexion conn = new Conexion();
 		this.alumnos=OperacionesBD.ExtraccionTablaAlumno(conn.conectarMySQL());
+		this.profesores=OperacionesBD.ExtraccionTablaProfesor(conn.conectarMySQL());
 		setTitle("Insertar alumno");
 		setBounds(100, 100, 1080, 561);
 		contentPane = new JPanel();
@@ -95,6 +98,12 @@ public class InsertarAlumno extends JFrame  {
 				existe=false;
 				for(Alumno alum:alumnos) {
 					if(alum.getDNI().equals(textDNI.getText())) {
+						existe=true;
+						break;
+					}
+				}
+				for(Profesor prof:profesores) {
+					if(prof.getDNI().equals(textDNI.getText())) {
 						existe=true;
 						break;
 					}
