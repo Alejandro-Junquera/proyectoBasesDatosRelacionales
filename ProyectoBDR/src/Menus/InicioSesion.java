@@ -108,6 +108,7 @@ public class InicioSesion extends JFrame {
 		JButton btnRegistro = new JButton("Registrarse");
 		btnRegistro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				dispose();
 				Registro r=new Registro();
 				r.setVisible(true);
 			}

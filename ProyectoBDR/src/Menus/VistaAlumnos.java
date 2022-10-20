@@ -34,7 +34,7 @@ public class VistaAlumnos extends JFrame {
 	private JPanel contentPane,panel;
 	private JTable tablaAlumnos;
 	private DefaultTableModel model;
-	private JButton btnVolverAdmin,btnInsertarAlumno,btnActualizarAlumno,btnEliminarAlumno,btnMostrarNotas;
+	private JButton btnVolverAdmin,btnInsertarAlumno,btnActualizarAlumno,btnEliminarAlumno;
 	private JLabel lblTitulo,lblFotoAlumno;
 	private Object[] fila;
 	private ArrayList<Alumno> alumnos= new ArrayList<Alumno>();
@@ -107,7 +107,7 @@ public class VistaAlumnos extends JFrame {
 		lblTitulo.setBounds(289, 58, 178, 48);
 		panel.add(lblTitulo);
 		scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 106, 735, 150);
+		scrollPane.setBounds(10, 106, 735, 291);
 		
 		panel.add(scrollPane);
 		
@@ -147,7 +147,7 @@ public class VistaAlumnos extends JFrame {
 				ia.setVisible(true);
 			}
 		});
-		btnInsertarAlumno.setBounds(67, 422, 121, 40);
+		btnInsertarAlumno.setBounds(143, 422, 121, 40);
 		panel.add(btnInsertarAlumno);
 		
 		btnActualizarAlumno = new JButton("Actualizar");
@@ -159,7 +159,7 @@ public class VistaAlumnos extends JFrame {
 				aa.setVisible(true);
 			}
 		});
-		btnActualizarAlumno.setBounds(224, 422, 121, 40);
+		btnActualizarAlumno.setBounds(296, 422, 121, 40);
 		panel.add(btnActualizarAlumno);
 		
 		btnEliminarAlumno = new JButton("Eliminar");
@@ -188,16 +188,8 @@ public class VistaAlumnos extends JFrame {
 				}
 			}
 		});
-		btnEliminarAlumno.setBounds(404, 422, 121, 40);
+		btnEliminarAlumno.setBounds(450, 422, 121, 40);
 		panel.add(btnEliminarAlumno);
-		
-		btnMostrarNotas = new JButton("Mostrar notas");
-		btnMostrarNotas.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btnMostrarNotas.setBounds(574, 422, 121, 40);
-		panel.add(btnMostrarNotas);
 		
 		lblFotoAlumno = new JLabel("");
 		lblFotoAlumno.setBounds(289, 278, 128, 119);

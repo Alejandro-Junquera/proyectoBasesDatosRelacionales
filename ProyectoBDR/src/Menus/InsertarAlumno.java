@@ -74,12 +74,12 @@ public class InsertarAlumno extends JFrame  {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		JLabel lblNombre = new JLabel("Nombre");
-		lblNombre.setBounds(10, 90, 109, 25);
+		lblNombre.setBounds(29, 90, 61, 25);
 		lblNombre.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		contentPane.add(lblNombre);
 		
 		JLabel lblContrasenia = new JLabel("Contraseña");
-		lblContrasenia.setBounds(10, 421, 109, 25);
+		lblContrasenia.setBounds(29, 421, 79, 25);
 		lblContrasenia.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		contentPane.add(lblContrasenia);
 		
@@ -94,7 +94,7 @@ public class InsertarAlumno extends JFrame  {
 		textContrasenia.setColumns(10);
 		
 		JLabel lblDNI = new JLabel("DNI");
-		lblDNI.setBounds(10, 25, 34, 25);
+		lblDNI.setBounds(29, 25, 34, 25);
 		lblDNI.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		contentPane.add(lblDNI);
 		
@@ -165,13 +165,13 @@ public class InsertarAlumno extends JFrame  {
 		contentPane.add(btnVolver);
 		
 		lblFoto = new JLabel("");
-		lblFoto.setBounds(904, 10, 152, 190);
+		lblFoto.setBounds(891, 20, 152, 190);
 		lblFoto.setText(".\\Imagenes\\Fotos\\defecto.jfif");
 		lblFoto.setIcon(ii.ResizableImage(lblFoto.getText(), lblFoto));
 		contentPane.add(lblFoto);
 		
 		JButton btnAadirImagen = new JButton("Añadir Imagen");
-		btnAadirImagen.setBounds(904, 218, 152, 40);
+		btnAadirImagen.setBounds(891, 228, 152, 40);
 		btnAadirImagen.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ii = new insertarImagenes();
@@ -182,7 +182,7 @@ public class InsertarAlumno extends JFrame  {
 		contentPane.add(btnAadirImagen);
 		
 		JLabel lblApellidos = new JLabel("Apellidos");
-		lblApellidos.setBounds(10, 156, 109, 25);
+		lblApellidos.setBounds(29, 156, 61, 25);
 		lblApellidos.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		contentPane.add(lblApellidos);
 		
@@ -192,7 +192,7 @@ public class InsertarAlumno extends JFrame  {
 		contentPane.add(textApellidos);
 		
 		JLabel lblTelefono = new JLabel("Telefono");
-		lblTelefono.setBounds(10, 217, 109, 25);
+		lblTelefono.setBounds(29, 217, 61, 25);
 		lblTelefono.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		contentPane.add(lblTelefono);
 		
@@ -202,13 +202,13 @@ public class InsertarAlumno extends JFrame  {
 		contentPane.add(textTelefono);
 		
 		JLabel lblFechaNacimiento = new JLabel("Fecha Nacimiento");
-		lblFechaNacimiento.setBounds(10, 316, 132, 25);
+		lblFechaNacimiento.setBounds(29, 316, 110, 25);
 		lblFechaNacimiento.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		contentPane.add(lblFechaNacimiento);
 		
 		textFecha = new JTextField("");
 		textFecha.setColumns(10);
-		textFecha.setBounds(373, 311, 146, 40);
+		textFecha.setBounds(370, 311, 96, 40);
 		textFecha.setEditable(false);
 		contentPane.add(textFecha);
 		
@@ -243,10 +243,10 @@ public class InsertarAlumno extends JFrame  {
 		
 
 		
-		JLabel lblAsignaturas = new JLabel("Seleccionar asignaturas");
-		lblAsignaturas.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblAsignaturas.setBounds(624, 69, 149, 25);
-		contentPane.add(lblAsignaturas);
+		JLabel lblMatAsignaturas = new JLabel("Matricular asignaturas");
+		lblMatAsignaturas.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblMatAsignaturas.setBounds(624, 69, 149, 25);
+		contentPane.add(lblMatAsignaturas);
 		
 		
 		 

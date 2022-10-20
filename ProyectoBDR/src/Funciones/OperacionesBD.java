@@ -302,7 +302,6 @@ public class OperacionesBD {
     }
 	
 	public static void MatricularAlumnoAsignatura(Connection conn, String dniAlu, int idAsig) {
-		System.out.println(dniAlu+"-"+idAsig);
 		PreparedStatement psInsert;
         String sqlInsert;
         try {
@@ -312,11 +311,11 @@ public class OperacionesBD {
         	psInsert.setInt(2, idAsig);
         	psInsert.executeUpdate();
         }catch(SQLException e){
-            JOptionPane.showMessageDialog(null, "Error de conexión:" + e.getMessage());
+
         }
 	}
 	
-	public static ArrayList<Matricula> MatricularAlumnoAsignatura(Connection conn) {
+	public static ArrayList<Matricula> ExtraerMatriculasAlumnoAsignatura(Connection conn) {
 		String sql="select dni_alu,id_asi from matricula;";
 		ArrayList<Matricula> matriculas=new ArrayList<>();
 		try {
@@ -436,8 +435,25 @@ public class OperacionesBD {
 		return false;
 	}
 	
+	public static void BorrarMatriculaAlumno(String dni,int idAsig,Connection conn) {
+		String sql="delete from matricula where dni_alu=? and id_asi=?;";
+		try {
+			PreparedStatement statement=conn.prepareStatement(sql);
+			statement.setString(1,dni);
+			statement.setInt(2,idAsig);
+			statement.executeUpdate();
+		} catch (SQLException e) {
+			
+		}
+	}
+	
 	public static void BorrarAlumno(String dni,Connection conn){
-
+		ArrayList<Matricula> matriculas=new ArrayList<>();
+		matriculas=ExtraerMatriculasAlumnoAsignatura(conn);
+		for(Matricula mat : matriculas) {
+			BorrarMatriculaAlumno(dni,mat.getId_asi(),conn);
+	    }
+		
 		String consulta= "delete from alumno where dni = ?;";
 		try {
 			PreparedStatement statement = conn.prepareStatement(consulta);

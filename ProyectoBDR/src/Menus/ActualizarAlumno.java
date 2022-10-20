@@ -56,7 +56,7 @@ public class ActualizarAlumno extends JFrame  {
 	public ActualizarAlumno(String dni, String nombre, String apellidos, String fecha,int tel ,String clave,String imagen, Connection conn) {
 		Conexion conn1 = new Conexion();
 		this.asignaturas=OperacionesBD.ExtraccionTodasAsignaturas(conn1.conectarMySQL());
-		this.matriculas=OperacionesBD.MatricularAlumnoAsignatura(conn1.conectarMySQL());
+		this.matriculas=OperacionesBD.ExtraerMatriculasAlumnoAsignatura(conn1.conectarMySQL());
 		setTitle("Actualizar alumno");
 		setBounds(100, 100, 1080, 561);
 		setResizable(false);
@@ -75,7 +75,13 @@ public class ActualizarAlumno extends JFrame  {
 		this.img=getToolkit().getImage(imagen);
 		this.img=this.img.getScaledInstance(lblFoto.getWidth(), lblFoto.getHeight(),Image.SCALE_DEFAULT);
 		lblFoto.setIcon(new ImageIcon(img));
-		System.out.println(matriculas);	
+		for(JCheckBox check : checkboxes) {
+		    for(Matricula mat : matriculas) {
+		    	if((mat.getDni_alu().equals(textDNI.getText()))&&(mat.getId_asi()==Integer.parseInt(check.getText().substring(check.getText().length()-1)))) {
+		    		check.setSelected(true);
+		    	}
+		    }
+		}
 	}
 
 	private void componentes() {
@@ -87,12 +93,12 @@ public class ActualizarAlumno extends JFrame  {
 		
 		lblNombre = new JLabel("Nombre");
 		lblNombre.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblNombre.setBounds(10, 84, 109, 25);
+		lblNombre.setBounds(26, 84, 111, 25);
 		contentPane.add(lblNombre);
 		
 		lblContrasenia = new JLabel("Contraseña");
 		lblContrasenia.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblContrasenia.setBounds(10, 406, 109, 25);
+		lblContrasenia.setBounds(26, 406, 111, 25);
 		contentPane.add(lblContrasenia);
 		
 		textNombre = new JTextField();
@@ -107,7 +113,7 @@ public class ActualizarAlumno extends JFrame  {
 		
 		lblDNI = new JLabel("DNI");
 		lblDNI.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblDNI.setBounds(10, 25, 34, 25);
+		lblDNI.setBounds(32, 25, 34, 25);
 		contentPane.add(lblDNI);
 		
 		textDNI = new JTextField();
@@ -123,7 +129,31 @@ public class ActualizarAlumno extends JFrame  {
 				if(combrobarCamposVacios(textNombre, textApellidos, textTelefono,textContrasenia)) {
 					try {
 						Conexion conn = new Conexion();
+						for(JCheckBox check : checkboxes) {
+						    for(Matricula mat : matriculas) {
+						    	if((mat.getDni_alu().equals(textDNI.getText()))&&(mat.getId_asi()==Integer.parseInt(check.getText().substring(check.getText().length()-1)))) {
+						    		if(check.isSelected()){
+						    			OperacionesBD.MatricularAlumnoAsignatura(conn.conectarMySQL(),textDNI.getText(),Integer.valueOf(check.getText().substring(check.getText().length()-1, check.getText().length())));
+						    		}
+						    		else {
+						    			OperacionesBD.BorrarMatriculaAlumno(textDNI.getText(),Integer.valueOf(check.getText().substring(check.getText().length()-1, check.getText().length())),conn.conectarMySQL());
+						    		}
+						    	}
+						    	else {
+						    		if(check.isSelected()){
+						    			OperacionesBD.MatricularAlumnoAsignatura(conn.conectarMySQL(),textDNI.getText(),Integer.valueOf(check.getText().substring(check.getText().length()-1, check.getText().length())));
+						    		}
+						    	}
+						    }
+						    if(check.isSelected()){
+				    			OperacionesBD.MatricularAlumnoAsignatura(conn.conectarMySQL(),textDNI.getText(),Integer.valueOf(check.getText().substring(check.getText().length()-1, check.getText().length())));
+				    		}
+						}
+						
+						
+						
 						Funciones.OperacionesBD.actualizarAlumno(textDNI.getText(), textNombre.getText(),textApellidos.getText(),textFecha.getText(),Integer.parseInt(textTelefono.getText()),textContrasenia.getText(),relativaFoto,conn.conectarMySQL());
+						JOptionPane.showMessageDialog(null, "Alumno actualizado");
 						dispose();
 						VistaAlumnos va= new VistaAlumnos();
 						va.setVisible(true);
@@ -157,7 +187,7 @@ public class ActualizarAlumno extends JFrame  {
 		contentPane.add(btnVolver);
 		
 		lblFoto = new JLabel("");
-		lblFoto.setBounds(904, 10, 152, 190);
+		lblFoto.setBounds(891, 21, 152, 190);
 		contentPane.add(lblFoto);
 		
 		btnAadirImagen = new JButton("Añadir Imagen");
@@ -169,12 +199,12 @@ public class ActualizarAlumno extends JFrame  {
 			}
 		});
 		btnAadirImagen.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnAadirImagen.setBounds(904, 210, 152, 40);
+		btnAadirImagen.setBounds(891, 221, 152, 40);
 		contentPane.add(btnAadirImagen);
 		
 		lblApellidos = new JLabel("Apellidos");
 		lblApellidos.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblApellidos.setBounds(10, 145, 56, 25);
+		lblApellidos.setBounds(26, 145, 111, 25);
 		contentPane.add(lblApellidos);
 		
 		textApellidos = new JTextField();
@@ -184,7 +214,7 @@ public class ActualizarAlumno extends JFrame  {
 		
 		lblTelefono = new JLabel("Telefono");
 		lblTelefono.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblTelefono.setBounds(10, 209, 56, 25);
+		lblTelefono.setBounds(26, 209, 62, 25);
 		contentPane.add(lblTelefono);
 		
 		textTelefono = new JTextField();
@@ -194,12 +224,12 @@ public class ActualizarAlumno extends JFrame  {
 		
 		lblFechaNacimiento = new JLabel("Fecha Nacimiento");
 		lblFechaNacimiento.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblFechaNacimiento.setBounds(10, 316, 132, 25);
+		lblFechaNacimiento.setBounds(26, 315, 111, 25);
 		contentPane.add(lblFechaNacimiento);
 		
 		textFecha = new JTextField();
 		textFecha.setColumns(10);
-		textFecha.setBounds(361, 289, 160, 40);
+		textFecha.setBounds(360, 300, 96, 40);
 		textFecha.setEditable(false);
 		contentPane.add(textFecha);
 		
@@ -233,10 +263,14 @@ public class ActualizarAlumno extends JFrame  {
 		    panel.add(box);
 		}
 		
-		JLabel lblAsignaturas = new JLabel("Seleccionar asignaturas");
-		lblAsignaturas.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblAsignaturas.setBounds(624, 69, 149, 25);
-		contentPane.add(lblAsignaturas);
+		JLabel lblActuAsignaturas = new JLabel("Actualizar asignaturas");
+		lblActuAsignaturas.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblActuAsignaturas.setBounds(624, 69, 149, 25);
+		contentPane.add(lblActuAsignaturas);
+		
+		
+		
+
 		
 	}
 	public boolean combrobarCamposVacios(JTextField nombre,JTextField apellidos,JTextField telefono,JTextField contrasenia) {
