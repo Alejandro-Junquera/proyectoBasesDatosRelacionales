@@ -36,13 +36,13 @@ public class AdminAsignatura extends JFrame {
 	
 
 	public AdminAsignatura(Connection conn) {
-		contentPane.setBackground(JFrameDiseño.fondoAdmin);
 		setTitle("Administracion de asignaturas");
 		asignaturas=OperacionesBD.ExtraccionTodasAsignaturas(conn);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 769, 536);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setBackground(JFrameDiseño.fondoAdmin);
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
