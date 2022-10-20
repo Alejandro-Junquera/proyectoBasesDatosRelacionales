@@ -377,8 +377,10 @@ public class OperacionesBD {
             
             if(ExisteNota(conn, dniAlu, idRA)) {
             	psUpdate.executeUpdate();
+            	JOptionPane.showMessageDialog(null, "Alumno calificado correctamente");
             }else {
             	psInsert.executeUpdate();
+            	JOptionPane.showMessageDialog(null, "Alumno calificado correctamente");
             }
         }catch(SQLException e){
             JOptionPane.showMessageDialog(null, "Error de conexión:" + e.getMessage());

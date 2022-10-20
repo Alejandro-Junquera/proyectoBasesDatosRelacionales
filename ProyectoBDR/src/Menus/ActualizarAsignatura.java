@@ -13,6 +13,7 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import Conexiones.Conexion;
+import Funciones.JFrameDiseño;
 import Funciones.OperacionesBD;
 
 import javax.swing.JLabel;
@@ -31,6 +32,7 @@ public class ActualizarAsignatura extends JFrame {
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setBackground(JFrameDiseño.fondoAdmin);
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);

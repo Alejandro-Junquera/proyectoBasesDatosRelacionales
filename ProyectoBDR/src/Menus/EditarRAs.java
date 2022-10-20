@@ -15,6 +15,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 import Conexiones.Conexion;
+import Funciones.JFrameDiseño;
 import Funciones.OperacionesBD;
 import Funciones.Profesor;
 import Funciones.RA;
@@ -36,6 +37,7 @@ public class EditarRAs extends JFrame {
 		setBounds(100, 100, 506, 315);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setBackground(JFrameDiseño.fondoAdmin);
 
 		setContentPane(contentPane);
 		

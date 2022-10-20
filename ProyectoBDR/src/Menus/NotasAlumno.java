@@ -14,6 +14,7 @@ import javax.swing.table.DefaultTableModel;
 
 import Funciones.Alumno;
 import Funciones.Asignatura;
+import Funciones.JFrameDiseño;
 import Funciones.OperacionesBD;
 import Funciones.Profesor;
 import Funciones.RA;
@@ -38,6 +39,7 @@ public class NotasAlumno extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		contentPane.setBackground(JFrameDiseño.fondoAdmin);
 		
 		JLabel lblNewLabel = new JLabel("Notas de "+nombreAsig+" de "+nombreAlu);
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 25));

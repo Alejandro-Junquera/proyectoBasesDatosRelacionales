@@ -10,6 +10,7 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import Conexiones.Conexion;
 import Funciones.Alumno;
+import Funciones.JFrameDiseño;
 import Funciones.OperacionesBD;
 import Funciones.Profesor;
 import Funciones.insertarImagenes;
@@ -51,6 +52,7 @@ public class InsertarAlumno extends JFrame  {
 		setTitle("Insertar alumno");
 		setBounds(100, 100, 1080, 561);
 		contentPane = new JPanel();
+		contentPane.setBackground(JFrameDiseño.fondoAdmin);
 		Dimension pantallaTamano = Toolkit.getDefaultToolkit().getScreenSize();
 		this.setLocation((pantallaTamano.width/2)-(this.getWidth()/2), (pantallaTamano.height/2)-(this.getHeight()/2));
 		componentes();

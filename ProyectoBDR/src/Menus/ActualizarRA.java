@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import Conexiones.Conexion;
+import Funciones.JFrameDiseño;
 import Funciones.OperacionesBD;
 
 import javax.swing.JButton;
@@ -26,6 +27,7 @@ public class ActualizarRA extends JFrame {
 	private JTextField textPonderacion;
 
 	public ActualizarRA(Connection conn, int idRA, String nombre, String descripcion, Integer ponderacion) {
+		contentPane.setBackground(JFrameDiseño.fondoAdmin);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();

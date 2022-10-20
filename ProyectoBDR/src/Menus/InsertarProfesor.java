@@ -85,6 +85,7 @@ public class InsertarProfesor extends JFrame {
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setLocationRelativeTo(null);
+		contentPane.setBackground(JFrameDiseño.fondoAdmin);
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);

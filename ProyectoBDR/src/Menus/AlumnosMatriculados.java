@@ -12,6 +12,7 @@ import javax.swing.table.DefaultTableModel;
 
 import Conexiones.Conexion;
 import Funciones.Alumno;
+import Funciones.JFrameDiseño;
 import Funciones.OperacionesBD;
 import Funciones.RA;
 
@@ -45,6 +46,7 @@ public class AlumnosMatriculados extends JFrame {
 		setBounds(100, 100, 515, 345);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setBackground(JFrameDiseño.fondoAdmin);
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);

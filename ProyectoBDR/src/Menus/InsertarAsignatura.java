@@ -7,6 +7,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import Conexiones.Conexion;
+import Funciones.JFrameDiseño;
 import Funciones.OperacionesBD;
 
 import javax.swing.JButton;
@@ -32,6 +33,7 @@ public class InsertarAsignatura extends JFrame {
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		contentPane.setBackground(JFrameDiseño.fondoAdmin);
 		
 		
 		

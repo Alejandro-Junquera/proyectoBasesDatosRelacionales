@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
+import Funciones.JFrameDiseño;
 import Funciones.OperacionesBD;
 import Funciones.RA;
 
@@ -24,8 +25,8 @@ public class EvaluacionAlumno extends JFrame {
 
 	private JPanel contentPane;
 	private JTable table;
-	private DefaultTableModel model;
-	private Object[] fila;
+	private static DefaultTableModel model;
+	private static Object[] fila;
 	private int filaSeleccionada;
 
 	
@@ -38,6 +39,7 @@ public class EvaluacionAlumno extends JFrame {
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		contentPane.setBackground(JFrameDiseño.fondoAdmin);
 		
 		JLabel lblNewLabel = new JLabel("Notas de "+nombreAsig+" de "+nombreAlu+" "+apellidosAlu);
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -76,9 +78,8 @@ public class EvaluacionAlumno extends JFrame {
 		btnEvaluar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				InsertarNota in = new InsertarNota(conn, dniAlu, rasAsig.get(filaSeleccionada).getId());
+				InsertarNota in = new InsertarNota(conn, dniAlu, rasAsig.get(filaSeleccionada).getId(), rasAsig);
 				in.setVisible(true);
-				llenarTabla(conn, rasAsig, dniAlu);
 			}
 		});
 		btnEvaluar.setBounds(56, 212, 89, 23);
@@ -86,10 +87,10 @@ public class EvaluacionAlumno extends JFrame {
 		llenarTabla(conn, rasAsig, dniAlu);
 	}
 	
-	private void llenarTabla(Connection conn, ArrayList<RA> rasAsig, String dniAlu) {
+	public static void llenarTabla(Connection conn, ArrayList<RA> rasAsig, String dniAlu) {
 		model.setRowCount(0);
 		for (RA ra:rasAsig) {
-			this.fila = new Object[4];
+			fila = new Object[4];
 			try {
 				fila[0]=ra.getNombre();
 				fila[1]=ra.getDescripcion();
