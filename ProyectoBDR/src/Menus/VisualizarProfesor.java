@@ -57,6 +57,7 @@ public class VisualizarProfesor extends JFrame {
 		asignaturasPropias = OperacionesBD.ExtraccionAsignaturasProf(dni, conn);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1027, 750);
+		setResizable(false);
 		contentPane = new JPanel();
 		contentPane.setBackground(JFrameDiseño.fondoAdmin);
 		setTitle("Visualizar Profesor");

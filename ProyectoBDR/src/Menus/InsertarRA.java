@@ -28,6 +28,7 @@ public class InsertarRA extends JFrame {
 	public InsertarRA(int idAsig,String nombreAsig,Connection conn) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 482, 338);
+		setResizable(false);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 

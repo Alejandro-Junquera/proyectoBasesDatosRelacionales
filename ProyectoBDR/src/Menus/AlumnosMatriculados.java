@@ -44,6 +44,7 @@ public class AlumnosMatriculados extends JFrame {
 	public AlumnosMatriculados(Connection conn, int idAsig,String nombreAsig, String dniProf, ArrayList<RA> rasAsig) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 515, 345);
+		setResizable(false);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setBackground(JFrameDiseño.fondoAdmin);

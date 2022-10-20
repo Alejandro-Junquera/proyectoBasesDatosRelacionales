@@ -79,6 +79,7 @@ public class InsertarProfesor extends JFrame {
 		asignaturasLibres = OperacionesBD.ExtraccionAsignaturas(conn);
 		asignaturaAsig = new ArrayList<>();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setResizable(false);
 		setBounds(100, 100, 1027, 750);
 		setTitle("Insertar Profesor");
 		setIconImage(JFrameDiseño.logo.getImage());

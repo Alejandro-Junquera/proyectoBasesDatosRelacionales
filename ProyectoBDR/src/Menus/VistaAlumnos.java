@@ -46,6 +46,7 @@ public class VistaAlumnos extends JFrame {
 	public VistaAlumnos() {
 		setTitle("Administrador de alumnos");
 		setBounds(100, 100, 769, 536);
+		setResizable(false);
 		Conexion conn = new Conexion();
 		this.alumnos=OperacionesBD.ExtraccionTablaAlumno(conn.conectarMySQL());
 		Dimension pantallaTamano = Toolkit.getDefaultToolkit().getScreenSize();

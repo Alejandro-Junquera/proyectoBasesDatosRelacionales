@@ -59,6 +59,7 @@ public class ActualizarAlumno extends JFrame  {
 		this.matriculas=OperacionesBD.MatricularAlumnoAsignatura(conn1.conectarMySQL());
 		setTitle("Actualizar alumno");
 		setBounds(100, 100, 1080, 561);
+		setResizable(false);
 		contentPane = new JPanel();
 		Dimension pantallaTamano = Toolkit.getDefaultToolkit().getScreenSize();
 		this.setLocation((pantallaTamano.width/2)-(this.getWidth()/2), (pantallaTamano.height/2)-(this.getHeight()/2));

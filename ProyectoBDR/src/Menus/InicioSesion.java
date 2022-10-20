@@ -47,6 +47,7 @@ public class InicioSesion extends JFrame {
 		connbd=new Conexion();
 		conn=connbd.conectarMySQL();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setResizable(false);
 		setBounds(100, 100, 550, 650);
 		setTitle("Iniciar sesión");
 		contentPane = new JPanel();

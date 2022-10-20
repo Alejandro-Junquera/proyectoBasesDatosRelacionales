@@ -70,6 +70,7 @@ public class InsertarAlumno extends JFrame  {
 		Conexion conn = new Conexion();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setLocationRelativeTo(null);
+		setResizable(false);
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		JLabel lblNombre = new JLabel("Nombre");

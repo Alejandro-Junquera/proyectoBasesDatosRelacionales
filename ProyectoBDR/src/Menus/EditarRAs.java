@@ -36,6 +36,7 @@ public class EditarRAs extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 506, 315);
 		contentPane = new JPanel();
+		setResizable(false);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setBackground(JFrameDiseño.fondoAdmin);
 

@@ -73,6 +73,7 @@ public class AdminProfesor extends JFrame {
 		profesores=OperacionesBD.ExtraccionTablaProfesor(conn);
 		asignaturas=OperacionesBD.ExtraccionAsignaturas(conn);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setResizable(false);
 		setTitle("Administrar Profesores");
 		setBounds(100, 100, 950, 700);
 		contentPane = new JPanel();

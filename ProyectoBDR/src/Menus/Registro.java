@@ -45,6 +45,7 @@ public class Registro extends JFrame {
 		this.alumnos=OperacionesBD.ExtraccionTablaAlumno(conn.conectarMySQL());
 		this.profesores=OperacionesBD.ExtraccionTablaProfesor(conn.conectarMySQL());
 		setTitle("Registrar alumno");
+		setResizable(false);
 		setBounds(100, 100, 1080, 561);
 		contentPane = new JPanel();
 		Dimension pantallaTamano = Toolkit.getDefaultToolkit().getScreenSize();

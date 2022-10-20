@@ -84,6 +84,7 @@ public class ActualizarProfesor extends JFrame {
 		asignaturasPropias = OperacionesBD.ExtraccionAsignaturasProf(dni, conn);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setTitle("Actualizar Profesor");
+		setResizable(false);
 		setIconImage(JFrameDiseño.logo.getImage());
 		setBounds(100, 100, 1027, 750);
 		contentPane = new JPanel();

@@ -29,6 +29,7 @@ public class InsertarNota extends JFrame {
 	public InsertarNota(Connection conn, String dniAlu,int idRA, ArrayList<RA> rasAsig) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 252, 223);
+		setResizable(false);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);

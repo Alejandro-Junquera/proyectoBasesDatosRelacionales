@@ -50,6 +50,7 @@ public class ProfesorInfo extends JFrame {
 	public ProfesorInfo(Connection conn, String dniProf) {
 		asignaturas=OperacionesBD.ExtraccionAsignaturasProf(dniProf, conn);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setResizable(false);
 		setBounds(100, 100, 550, 650);
 		contentPane = new JPanel();
 		contentPane.setBackground(JFrameDiseño.fondoAdmin);
