@@ -26,8 +26,7 @@ public class ActualizarRA extends JFrame {
 	private JTextField textDescripcion;
 	private JTextField textPonderacion;
 
-	public ActualizarRA(Connection conn, int idRA, String nombre, String descripcion, Integer ponderacion) {
-		contentPane.setBackground(JFrameDiseño.fondoAdmin);
+	public ActualizarRA(Connection conn, int idRA, String nombre, String descripcion, Integer ponderacion, int idAsig, String nombreAsig) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -35,7 +34,7 @@ public class ActualizarRA extends JFrame {
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+		contentPane.setBackground(JFrameDiseño.fondoAdmin);
 		JButton btnAceptar = new JButton("Aceptar");
 		btnAceptar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -45,8 +44,10 @@ public class ActualizarRA extends JFrame {
 					JOptionPane.showMessageDialog(null, "No se puede dejar ningun campo en blanco");
 				}else {
 					OperacionesBD.actualizarRA(textNombre.getText(),textDescripcion.getText(),
-					Integer.valueOf(textPonderacion.getText()),idRA,conn);
-					dispose();
+					          textPonderacion.getText(),idRA,conn);
+					          dispose();
+					          EditarRAs ER = new EditarRAs(idAsig, nombreAsig,conn);
+					          ER.setVisible(true);
 				}
 				
 			}

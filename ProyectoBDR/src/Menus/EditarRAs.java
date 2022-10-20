@@ -82,10 +82,15 @@ public class EditarRAs extends JFrame {
 		JButton btnActualizar = new JButton("Actualizar");
 		btnActualizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ActualizarRA AR = new ActualizarRA(conn,rasAsig.get(filaSeleccionada).getId(),
-						rasAsig.get(filaSeleccionada).getNombre(),rasAsig.get(filaSeleccionada).getDescripcion(),
-						Integer.valueOf(rasAsig.get(filaSeleccionada).getPonderacion()));
-				AR.setVisible(true);
+				if(filaSeleccionada==null) {
+			          JOptionPane.showMessageDialog(null, "Selecciona un RA");
+			        }else {
+			        ActualizarRA AR = new ActualizarRA(conn,rasAsig.get(filaSeleccionada).getId(),
+			            rasAsig.get(filaSeleccionada).getNombre(),rasAsig.get(filaSeleccionada).getDescripcion(),
+			            rasAsig.get(filaSeleccionada).getPonderacion(), idAsig, nombreAsig);
+			        AR.setVisible(true);
+			        dispose();
+			        }
 			}
 		});
 		btnActualizar.setBounds(246, 227, 106, 23);

@@ -109,9 +109,12 @@ public class AdminAsignatura extends JFrame {
 		JButton btnEditarRAs = new JButton("Editar RAs");
 		btnEditarRAs.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				EditarRAs ER = new EditarRAs(asignaturas.get(filaSeleccionada).getId(),asignaturas.get(filaSeleccionada).getNombre(), conn);
-				
-				ER.setVisible(true);
+				if(filaSeleccionada==null) {
+			          JOptionPane.showMessageDialog(null, "Selecciona una asignatura");
+			        }else {
+			          EditarRAs ER = new EditarRAs(asignaturas.get(filaSeleccionada).getId(),asignaturas.get(filaSeleccionada).getNombre(), conn);
+			          ER.setVisible(true);
+			        }
 			}
 		});
 		btnEditarRAs.setBounds(532, 427, 120, 23);

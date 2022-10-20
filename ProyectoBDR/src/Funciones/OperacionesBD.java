@@ -212,7 +212,7 @@ public class OperacionesBD {
 		
 	}
 	
-	public static void actualizarRA(String nombre,String descripcion,int ponderacion, int idRA,Connection conn) {
+	public static void actualizarRA(String nombre,String descripcion,String ponderacion, int idRA,Connection conn) {
 		String sql="update ra set nombre=? where id=?;";
 		String sql2="update ra set descripcion=? where id=?;";
 		String sql3="update ra set ponderacion=? where id=?;";
@@ -224,12 +224,14 @@ public class OperacionesBD {
 			statement.setInt(2,idRA);
 			statement2.setString(1,descripcion);
 			statement2.setInt(2,idRA);
-			statement3.setInt(1,ponderacion);
-			statement3.setInt(1,idRA);
+			statement3.setString(1,ponderacion);
+			statement3.setInt(2,idRA);
 			statement.executeUpdate();
 			statement2.executeUpdate();
+			statement3.executeUpdate();
 			statement.close();
 			statement2.close();
+			statement3.close();
 			JOptionPane.showMessageDialog(null, "Se han actualizado la asignatura correctamente");
 			
 		} catch (SQLException e) {

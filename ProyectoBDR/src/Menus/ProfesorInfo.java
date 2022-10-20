@@ -158,9 +158,13 @@ public class ProfesorInfo extends JFrame {
 		JButton btnEditarRA = new JButton("Editar RAs");
 		btnEditarRA.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				EditarRAs ER = new EditarRAs(asignaturas.get(filaSeleccionada).getId(),asignaturas.get(filaSeleccionada).getNombre(), conn);
-				
-				ER.setVisible(true);
+				if(filaSeleccionada==null) {
+			        JOptionPane.showMessageDialog(null, "Selecciona una asignatura");
+			    }else {
+					EditarRAs ER = new EditarRAs(asignaturas.get(filaSeleccionada).getId(),asignaturas.get(filaSeleccionada).getNombre(), conn);
+					
+					ER.setVisible(true);
+			    }
 			}
 		});
 		btnEditarRA.setBounds(212, 389, 107, 23);
