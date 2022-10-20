@@ -1,5 +1,5 @@
 package Menus;
-
+import com.toedter.calendar.JCalendar;
 
 import java.awt.Dimension;
 import java.awt.Font;
@@ -9,11 +9,18 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import Conexiones.Conexion;
+import Funciones.Alumno;
+import Funciones.OperacionesBD;
 import Funciones.insertarImagenes;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeEvent;
  
 
 public class InsertarAlumno extends JFrame  {
@@ -24,13 +31,19 @@ public class InsertarAlumno extends JFrame  {
 	private JTextField textDNI;
 	private JTextField textApellidos;
 	private JTextField textTelefono;
-	private JTextField textFecha;
 	private JLabel lblFoto;
 	protected insertarImagenes ii= new insertarImagenes();
+	private JCalendar fecha;
+	private JTextField textFecha;
+	protected boolean existe;
+	private ArrayList<Alumno> alumnos= new ArrayList<Alumno>();
+
 
 
 
 	public InsertarAlumno() {
+		Conexion conn = new Conexion();
+		this.alumnos=OperacionesBD.ExtraccionTablaAlumno(conn.conectarMySQL());
 		setTitle("Insertar alumno");
 		setBounds(100, 100, 1080, 561);
 		contentPane = new JPanel();
@@ -46,50 +59,75 @@ public class InsertarAlumno extends JFrame  {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		JLabel lblNombre = new JLabel("Nombre");
+		lblNombre.setBounds(172, 90, 109, 25);
 		lblNombre.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblNombre.setBounds(172, 122, 109, 25);
 		contentPane.add(lblNombre);
 		
 		JLabel lblContrasenia = new JLabel("Contraseña");
+		lblContrasenia.setBounds(172, 421, 109, 25);
 		lblContrasenia.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblContrasenia.setBounds(172, 379, 109, 25);
 		contentPane.add(lblContrasenia);
 		
 		textNombre = new JTextField();
-		textNombre.setBounds(314, 107, 253, 40);
+		textNombre.setBounds(314, 75, 253, 40);
 		contentPane.add(textNombre);
 		textNombre.setColumns(10);
 		
 		textContrasenia = new JTextField();
-		textContrasenia.setBounds(314, 364, 253, 40);
+		textContrasenia.setBounds(314, 406, 253, 40);
 		contentPane.add(textContrasenia);
 		textContrasenia.setColumns(10);
 		
 		JLabel lblDNI = new JLabel("DNI");
+		lblDNI.setBounds(172, 25, 34, 25);
 		lblDNI.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblDNI.setBounds(172, 57, 34, 25);
 		contentPane.add(lblDNI);
 		
 		textDNI = new JTextField();
+		textDNI.setBounds(314, 10, 253, 40);
 		textDNI.setColumns(10);
-		textDNI.setBounds(314, 42, 253, 40);
 		contentPane.add(textDNI);
 		
 		JButton btnAniadir = new JButton("Añadir");
+		btnAniadir.setBounds(206, 456, 180, 40);
 		btnAniadir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				existe=false;
+				for(Alumno alum:alumnos) {
+					if(alum.getDNI().equals(textDNI.getText())) {
+						existe=true;
+						break;
+					}
+				}
 				Conexion conn = new Conexion();
-				Funciones.OperacionesBD.insertarAlumno(textDNI.getText(), textNombre.getText(),textApellidos.getText(),textFecha.getText(),Integer.parseInt(textTelefono.getText()),textContrasenia.getText(),lblFoto.getText(),conn.conectarMySQL());
-				dispose();
-				VistaAlumnos va= new VistaAlumnos();
-				va.setVisible(true);
+				if(!existe) {
+					if(combrobarCamposVacios(textDNI, textNombre, textApellidos, textFecha, textTelefono,textContrasenia)) {
+						try {
+							Funciones.OperacionesBD.insertarAlumno(textDNI.getText(), textNombre.getText(),textApellidos.getText(),textFecha.getText(),Integer.parseInt(textTelefono.getText()),textContrasenia.getText(),lblFoto.getText(),conn.conectarMySQL());
+							dispose();
+							VistaAlumnos va= new VistaAlumnos();
+							va.setVisible(true);
+						}catch(NumberFormatException nfe1) {
+							JOptionPane.showMessageDialog(null, "El campo teléfono solo puede contener números");
+						}
+						
+					}
+					else {
+						JOptionPane.showMessageDialog(null, "No puede haber campos vacios");
+					}
+				}
+				else {
+					JOptionPane.showMessageDialog(null, "Ya existe un usuario con ese Dni");
+				}
+				
+				
 			}
 		});
 		btnAniadir.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnAniadir.setBounds(206, 456, 180, 40);
 		contentPane.add(btnAniadir);
 		
 		JButton btnVolver = new JButton("Volver");
+		btnVolver.setBounds(679, 456, 180, 40);
 		btnVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
@@ -98,7 +136,6 @@ public class InsertarAlumno extends JFrame  {
 			}
 		});
 		btnVolver.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnVolver.setBounds(679, 456, 180, 40);
 		contentPane.add(btnVolver);
 		
 		lblFoto = new JLabel("");
@@ -108,6 +145,7 @@ public class InsertarAlumno extends JFrame  {
 		contentPane.add(lblFoto);
 		
 		JButton btnAadirImagen = new JButton("Añadir Imagen");
+		btnAadirImagen.setBounds(691, 301, 152, 40);
 		btnAadirImagen.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ii = new insertarImagenes();
@@ -115,39 +153,61 @@ public class InsertarAlumno extends JFrame  {
 			}
 		});
 		btnAadirImagen.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnAadirImagen.setBounds(691, 301, 152, 40);
 		contentPane.add(btnAadirImagen);
 		
 		JLabel lblApellidos = new JLabel("Apellidos");
+		lblApellidos.setBounds(172, 155, 109, 25);
 		lblApellidos.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblApellidos.setBounds(172, 187, 109, 25);
 		contentPane.add(lblApellidos);
 		
 		textApellidos = new JTextField();
+		textApellidos.setBounds(314, 140, 253, 40);
 		textApellidos.setColumns(10);
-		textApellidos.setBounds(314, 172, 253, 40);
 		contentPane.add(textApellidos);
 		
 		JLabel lblTelefono = new JLabel("Telefono");
+		lblTelefono.setBounds(172, 219, 109, 25);
 		lblTelefono.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblTelefono.setBounds(172, 251, 109, 25);
 		contentPane.add(lblTelefono);
 		
 		textTelefono = new JTextField();
+		textTelefono.setBounds(314, 204, 253, 40);
 		textTelefono.setColumns(10);
-		textTelefono.setBounds(314, 236, 253, 40);
 		contentPane.add(textTelefono);
 		
 		JLabel lblFechaNacimiento = new JLabel("Fecha Nacimiento");
-		lblFechaNacimiento.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblFechaNacimiento.setBounds(172, 316, 132, 25);
+		lblFechaNacimiento.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		contentPane.add(lblFechaNacimiento);
 		
-		textFecha = new JTextField();
+		textFecha = new JTextField("");
 		textFecha.setColumns(10);
-		textFecha.setBounds(314, 301, 253, 40);
+		textFecha.setBounds(523, 311, 146, 40);
+		textFecha.setEditable(false);
 		contentPane.add(textFecha);
 		
+		fecha = new JCalendar();
+		fecha.addPropertyChangeListener(new PropertyChangeListener() {
+			public void propertyChange(PropertyChangeEvent evt) {
+				if(evt.getOldValue()!=null) {
+					SimpleDateFormat ff = new SimpleDateFormat("yyyy-MM-dd");
+					textFecha.setText(ff.format(fecha.getCalendar().getTime()));
+				}
+			}
+		});
+		fecha.setWeekOfYearVisible(false);
+		fecha.setBounds(314, 259, 199, 137);
+		contentPane.add(fecha);
+		
+		
+		 
 	}
-
+	
+	public boolean combrobarCamposVacios(JTextField dni,JTextField nombre,JTextField apellidos,JTextField fecha,JTextField telefono,JTextField contrasenia) {
+		if(!dni.getText().isEmpty() && !nombre.getText().isEmpty() && !apellidos.getText().isEmpty() && !fecha.getText().isEmpty() && !telefono.getText().isEmpty()&& !contrasenia.getText().isEmpty()) {
+			return true;
+		}else {
+			return false;
+		}
+	}
 }

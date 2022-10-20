@@ -16,7 +16,6 @@ import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.awt.event.ActionEvent;
 import javax.swing.ImageIcon;
-import java.awt.Color;
 import Funciones.ComprobarUsuario;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -109,6 +108,7 @@ public class InicioSesion extends JFrame {
 		btnRegistro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Registro r=new Registro();
+				r.setVisible(true);
 			}
 		});
 		btnRegistro.setBounds(335, 387, 107, 21);
