@@ -25,7 +25,6 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeEvent;
 import javax.swing.JScrollPane;
  
-
 public class InsertarAlumno extends JFrame  {
 
 	private JPanel contentPane;
