@@ -15,6 +15,7 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import Conexiones.Conexion;
+import Funciones.JFrameDiseño;
 import Funciones.OperacionesBD;
 import Funciones.RA;
 
@@ -32,12 +33,14 @@ public class InsertarNota extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		contentPane.setBackground(JFrameDiseño.fondoAdmin);
 		
 		
 		JLabel lblNota = new JLabel("Nota: ");
 		lblNota.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblNota.setBounds(27, 76, 51, 23);
 		contentPane.add(lblNota);
+		
 		
 		textNota = new JTextField();
 		textNota.setBounds(88, 79, 86, 20);

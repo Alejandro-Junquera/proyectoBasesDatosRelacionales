@@ -79,6 +79,7 @@ public class ActualizarProfesor extends JFrame {
 
 	public ActualizarProfesor(String dni, String nombre, String apellidos, String email, String clave, String img,
 			String asignatura, Connection conn) {
+		
 		asignaturasLibres = OperacionesBD.ExtraccionAsignaturas(conn);
 		asignaturasPropias = OperacionesBD.ExtraccionAsignaturasProf(dni, conn);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

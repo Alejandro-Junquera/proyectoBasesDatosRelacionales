@@ -21,6 +21,7 @@ import javax.swing.table.DefaultTableModel;
 
 import Funciones.Alumno;
 import Funciones.Asignatura;
+import Funciones.JFrameDiseño;
 import Funciones.OperacionesBD;
 import Funciones.RA;
 import Funciones.insertarImagenes;
@@ -58,6 +59,7 @@ public class AlumnoInfo extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		contentPane.setBackground(JFrameDiseño.fondoAdmin);
 		JPanel panel1 = new JPanel();
 
 		try {

@@ -15,6 +15,7 @@ import javax.swing.table.DefaultTableModel;
 
 import Conexiones.Conexion;
 import Funciones.Asignatura;
+import Funciones.JFrameDiseño;
 import Funciones.OperacionesBD;
 import Funciones.Profesor;
 import javax.swing.JScrollPane;
@@ -35,6 +36,7 @@ public class AdminAsignatura extends JFrame {
 	
 
 	public AdminAsignatura(Connection conn) {
+		contentPane.setBackground(JFrameDiseño.fondoAdmin);
 		setTitle("Administracion de asignaturas");
 		asignaturas=OperacionesBD.ExtraccionTodasAsignaturas(conn);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

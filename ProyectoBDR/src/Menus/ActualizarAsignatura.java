@@ -13,6 +13,7 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import Conexiones.Conexion;
+import Funciones.JFrameDiseño;
 import Funciones.OperacionesBD;
 
 import javax.swing.JLabel;
@@ -27,6 +28,7 @@ public class ActualizarAsignatura extends JFrame {
 
 	
 	public ActualizarAsignatura(Connection conn, int idAsig, String nombre, Integer horasSemanales) {
+		contentPane.setBackground(JFrameDiseño.fondoAdmin);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();

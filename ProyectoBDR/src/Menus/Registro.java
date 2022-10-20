@@ -16,6 +16,7 @@ import javax.swing.border.EmptyBorder;
 import com.toedter.calendar.JCalendar;
 import Conexiones.Conexion;
 import Funciones.Alumno;
+import Funciones.JFrameDiseño;
 import Funciones.OperacionesBD;
 import Funciones.Profesor;
 import Funciones.insertarImagenes;
@@ -56,6 +57,7 @@ public class Registro extends JFrame {
 		setLocationRelativeTo(null);
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		contentPane.setBackground(JFrameDiseño.fondoAdmin);
 		JLabel lblNombre = new JLabel("Nombre");
 		lblNombre.setBounds(172, 90, 109, 25);
 		lblNombre.setFont(new Font("Tahoma", Font.PLAIN, 14));

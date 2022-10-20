@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
+import Funciones.JFrameDiseño;
 import Funciones.OperacionesBD;
 import Funciones.RA;
 
@@ -38,6 +39,7 @@ public class EvaluacionAlumno extends JFrame {
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		contentPane.setBackground(JFrameDiseño.fondoAdmin);
 		
 		JLabel lblNewLabel = new JLabel("Notas de "+nombreAsig+" de "+nombreAlu+" "+apellidosAlu);
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));

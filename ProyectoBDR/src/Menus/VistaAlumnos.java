@@ -6,6 +6,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import Conexiones.Conexion;
 import Funciones.Alumno;
+import Funciones.JFrameDiseño;
 import Funciones.OperacionesBD;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -85,6 +86,7 @@ public class VistaAlumnos extends JFrame {
 		panel = new JPanel();
 		panel.setBounds(0, 0, 755, 499);
 		contentPane.add(panel);
+		contentPane.setBackground(JFrameDiseño.fondoAdmin);
 		panel.setLayout(null);
 		
 		btnVolverAdmin = new JButton("Volver");

@@ -9,6 +9,7 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import com.toedter.calendar.JCalendar;
 import Conexiones.Conexion;
+import Funciones.JFrameDiseño;
 import Funciones.insertarImagenes;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -42,6 +43,7 @@ public class ActualizarAlumno extends JFrame  {
 	}
 	
 	public ActualizarAlumno(String dni, String nombre, String apellidos, String fecha,int tel ,String clave,String imagen, Connection conn) {
+		contentPane.setBackground(JFrameDiseño.fondoAdmin);
 		setTitle("Actualizar alumno");
 		setBounds(100, 100, 1080, 561);
 		contentPane = new JPanel();
