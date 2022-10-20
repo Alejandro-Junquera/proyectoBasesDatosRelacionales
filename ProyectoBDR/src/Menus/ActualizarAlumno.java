@@ -43,7 +43,7 @@ public class ActualizarAlumno extends JFrame  {
 	}
 	
 	public ActualizarAlumno(String dni, String nombre, String apellidos, String fecha,int tel ,String clave,String imagen, Connection conn) {
-		contentPane.setBackground(JFrameDiseño.fondoAdmin);
+		
 		setTitle("Actualizar alumno");
 		setBounds(100, 100, 1080, 561);
 		contentPane = new JPanel();
@@ -69,6 +69,7 @@ public class ActualizarAlumno extends JFrame  {
 		setLocationRelativeTo(null);
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		contentPane.setBackground(JFrameDiseño.fondoAdmin);
 		
 		lblNombre = new JLabel("Nombre");
 		lblNombre.setFont(new Font("Tahoma", Font.PLAIN, 14));
