@@ -58,6 +58,8 @@ public class VisualizarProfesor extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1027, 750);
 		contentPane = new JPanel();
+		setTitle("Visualizar Profesor");
+		setIconImage(JFrameDiseño.logo.getImage());
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setLocationRelativeTo(null);
 
