@@ -9,19 +9,15 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
-
 import com.toedter.calendar.JCalendar;
-
 import Conexiones.Conexion;
 import Funciones.Alumno;
 import Funciones.OperacionesBD;
 import Funciones.insertarImagenes;
-
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JButton;
